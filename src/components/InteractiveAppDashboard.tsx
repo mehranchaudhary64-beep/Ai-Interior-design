@@ -186,7 +186,7 @@ export default function InteractiveAppDashboard() {
   const [historyList, setHistoryList] = useState<SavedGeneration[]>([]);
 
   // Pricing model setting
-  const [subscriptionTier, setSubscriptionTier] = useState<"Explorer (Free)" | "Atelier Pro" | "Studio Enterprise">("Explorer (Free)");
+  const [subscriptionTier, setSubscriptionTier] = useState<"Explorer (Free)" | "Roomora Pro" | "Roomora Enterprise">("Explorer (Free)");
   const [remainingCredits, setRemainingCredits] = useState<number>(0);
 
   const [userId, setUserId] = useState<string | null>(null);
@@ -534,7 +534,7 @@ export default function InteractiveAppDashboard() {
                   <option>Living Room</option>
                   <option>Primary Master Suite</option>
                   <option>Culinary Kitchen Area</option>
-                  <option>Executive Work Atelier</option>
+                  <option>Executive Workspace</option>
                   <option>Bespoke Entry Hallway</option>
                   <option>Timeless Dining Room</option>
                 </select>
@@ -553,7 +553,7 @@ export default function InteractiveAppDashboard() {
                   <option>Scandinavian Modern</option>
                   <option>Japandi Minimalist</option>
                   <option>Luxe Editorial (High Luxury)</option>
-                  <option>Mid-Century Atelier</option>
+                  <option>Mid-Century Modern</option>
                   <option>Industrial Brutalist</option>
                   <option>Contemporary Classic</option>
                 </select>
@@ -639,7 +639,7 @@ export default function InteractiveAppDashboard() {
               )}
             </button>
             <div className="text-center text-[9px] font-mono text-luxury-slate">
-              Atelier Pro client • Deducts 1 AI processing credit
+              Roomora Pro client • Deducts 1 AI processing credit
             </div>
           </div>
         )}
@@ -1096,10 +1096,10 @@ export default function InteractiveAppDashboard() {
                               </div>
                               <div>
                                 <span className="text-[10px] font-mono text-luxury-charcoal uppercase block font-bold leading-none">
-                                  Atelier Principal Director
+                                  Roomora Principal Director
                                 </span>
                                 <span className="text-[9px] font-mono text-luxury-slate tracking-tight">
-                                  Aura Design Council
+                                  Roomora Design Council
                                 </span>
                               </div>
                             </div>
@@ -1237,29 +1237,29 @@ export default function InteractiveAppDashboard() {
                 </button>
 
                 <button
-                  onClick={() => handleUpgradeTier("Atelier Pro", 100)}
+                  onClick={() => handleUpgradeTier("Roomora Pro", 100)}
                   className={`p-4 rounded-lg text-left border transition-all ${
-                    subscriptionTier === "Atelier Pro"
+                    subscriptionTier === "Roomora Pro"
                       ? "border-luxury-accent bg-white shadow-sm"
                       : "border-luxury-stone hover:border-luxury-gold bg-transparent"
                   }`}
                 >
                   <span className="text-xs font-semibold text-luxury-charcoal block flex items-center gap-1.5">
-                    Atelier Pro <span className="bg-luxury-gold text-luxury-charcoal text-[9px] px-1 py-0.2 rounded font-mono">POPULAR</span>
+                    Roomora Pro <span className="bg-luxury-gold text-luxury-charcoal text-[9px] px-1 py-0.2 rounded font-mono">POPULAR</span>
                   </span>
                   <span className="text-[10px] font-mono text-luxury-slate block mt-1">$49 / monthly</span>
                   <p className="text-[10px] text-luxury-slate mt-2 line-clamp-2">100 compilations, full server-to-server Gemini access, export PDF blueprint sheets.</p>
                 </button>
 
                 <button
-                  onClick={() => handleUpgradeTier("Studio Enterprise", 9999)}
+                  onClick={() => handleUpgradeTier("Roomora Enterprise", 9999)}
                   className={`p-4 rounded-lg text-left border transition-all ${
-                    subscriptionTier === "Studio Enterprise"
+                    subscriptionTier === "Roomora Enterprise"
                       ? "border-luxury-accent bg-white shadow-sm"
                       : "border-luxury-stone hover:border-luxury-gold bg-transparent"
                   }`}
                 >
-                  <span className="text-xs font-semibold text-luxury-charcoal block">Studio Enterprise</span>
+                  <span className="text-xs font-semibold text-luxury-charcoal block">Roomora Enterprise</span>
                   <span className="text-[10px] font-mono text-luxury-slate block mt-1">$190 / monthly</span>
                   <p className="text-[10px] text-luxury-slate mt-2 line-clamp-2">Unlimited compilations, custom branding filters, API webhook integration.</p>
                 </button>
@@ -1291,7 +1291,7 @@ export default function InteractiveAppDashboard() {
                   <label className="text-[10px] font-mono text-luxury-slate uppercase block">CREATOR NAME</label>
                   <input
                     type="text"
-                    defaultValue="Atelier Director"
+                    defaultValue="Roomora Director"
                     className="w-full bg-luxury-cream border border-luxury-stone rounded px-3 py-2 text-xs font-sans text-luxury-charcoal"
                   />
                 </div>

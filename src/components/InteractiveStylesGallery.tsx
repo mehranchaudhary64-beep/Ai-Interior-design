@@ -20,7 +20,7 @@ const TRANSFORMATION_MATRIX: Record<string, Record<string, string>> = {
     "Luxe Editorial": "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=1200",
     "Scandinavian Modern": "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?q=80&w=1200",
     "Japandi Minimalist": "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1200",
-    "Mid-Century Atelier": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=1200",
+    "Mid-Century Modern": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=1200",
     "Industrial Brutalist": "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1200",
     "Contemporary Classic": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1200"
   },
@@ -28,7 +28,7 @@ const TRANSFORMATION_MATRIX: Record<string, Record<string, string>> = {
     "Luxe Editorial": "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=1200",
     "Scandinavian Modern": "https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=1200",
     "Japandi Minimalist": "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=1200",
-    "Mid-Century Atelier": "https://images.unsplash.com/photo-1554995207-c18c203602cb?q=80&w=1200",
+    "Mid-Century Modern": "https://images.unsplash.com/photo-1554995207-c18c203602cb?q=80&w=1200",
     "Industrial Brutalist": "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1200",
     "Contemporary Classic": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1200"
   },
@@ -36,7 +36,7 @@ const TRANSFORMATION_MATRIX: Record<string, Record<string, string>> = {
     "Luxe Editorial": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1200",
     "Scandinavian Modern": "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?q=80&w=1200",
     "Japandi Minimalist": "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1200",
-    "Mid-Century Atelier": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=1200",
+    "Mid-Century Modern": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=1200",
     "Industrial Brutalist": "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1200",
     "Contemporary Classic": "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=1200"
   }
@@ -47,7 +47,7 @@ const STYLE_DESIGNERS_NOTES: Record<string, string> = {
   "Luxe Editorial": "Achieved through extreme axial alignment and material luxury. By placing bookmatched Arabescato marble as the focal hearth and panels of French Walnut alongside high-shine champagne brass, we establish a sense of majestic scale and absolute editorial confidence.",
   "Scandinavian Modern": "Focused purely on daylight optimization and structural subtraction. We introduce soft lime-washed oak boards paired with textured Pebble Bouclé. This approach channels natural vertical afternoon lighting to form a warm, diffuse, and silent domestic retreat.",
   "Japandi Minimalist": "A study in organic textures, asymmetry, and raw balance. Low seating platforms are grounded on premium tatami mats, contrasted with heavy Shou Sugi Ban trims and warm, hand-honed clay plasters that absorb glare to foster absolute meditation.",
-  "Mid-Century Atelier": "Curates custom vintage geometries. Teak storage plinths are contrasted with polished tubular chrome frames and honey cognac saddle leathers. We balanced the low-to-the-floor sightlines by incorporating high, textured linen sheers.",
+  "Mid-Century Modern": "Curates custom vintage geometries. Teak storage plinths are contrasted with polished tubular chrome frames and honey cognac saddle leathers. We balanced the low-to-the-floor sightlines by incorporating high, textured linen sheers.",
   "Industrial Brutalist": "Focuses on architectural honesty. We contrast bead-blasted raw concrete wall aggregates with rugged, patinated steel panels. The seating features deep distressed hide surfaces, highlighted by high-contrast linear black architectural downlights.",
   "Contemporary Classic": "A harmonious layout pairing historic heritage with modern minimalist volume. We contrast neoclassical plaster crown moldings with low, monolithic geometric bouclé lounges, utilizing clean brass rods to anchor lighting coordinates."
 };
@@ -72,7 +72,7 @@ const STYLE_SWATCHES: Record<string, { colorName: string; hex: string; role: str
     { colorName: "Natural Rye Oak", hex: "#CEBFA8", role: "Structural frames (15%)" },
     { colorName: "Moss Sage Linen", hex: "#7E857C", role: "Soft accents (5%)" }
   ],
-  "Mid-Century Atelier": [
+  "Mid-Century Modern": [
     { colorName: "Saffron Teak", hex: "#9E5E38", role: "Main cabinetry (50%)" },
     { colorName: "Cognac Hide", hex: "#6E3E26", role: "Lounge leather (30%)" },
     { colorName: "Polished Chrome", hex: "#D1D5DB", role: "Tubular frames (10%)" },

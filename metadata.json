@@ -1,6 +1,6 @@
 {
-  "name": "AI Interior Design",
-  "description": "An ultra-premium, human-centered AI interior design studio and spatial styling application.",
+  "name": "Roomora AI",
+  "description": "Transform Any Room with AI using Roomora AI.",
   "requestFramePermissions": ["camera"],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

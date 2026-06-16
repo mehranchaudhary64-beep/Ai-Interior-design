@@ -59,7 +59,7 @@ export interface SpecSection {
 export const PRESET_ROOMS: DesignPreset[] = [
   {
     id: "scandinavian_preset",
-    name: "Aura Residence, Living Room",
+    name: "Roomora Residence, Living Room",
     style: "Scandinavian Modern",
     roomType: "Living Room",
     beforeImage: "https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=1200", // empty light rustic room
@@ -193,7 +193,7 @@ export const DESIGN_STYLES = [
     sampleImage: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=600"
   },
   {
-    name: "Mid-Century Atelier",
+    name: "Mid-Century Modern",
     desc: "Curated vintage modernism. Tapered executive desks, warm teak timbers, polished steel frames, leather-weave loungers, and dynamic visual art backdrops with warm cognac colors.",
     sampleImage: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=600"
   },

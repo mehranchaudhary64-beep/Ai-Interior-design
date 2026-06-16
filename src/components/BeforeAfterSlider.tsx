@@ -18,6 +18,7 @@ export default function BeforeAfterSlider({
 }: BeforeAfterSliderProps) {
   const [sliderPosition, setSliderPosition] = useState(50); // percentage 0-100
   const [isDragging, setIsDragging] = useState(false);
+  const [lensPos, setLensPos] = useState<{ x: number; y: number } | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const handleMove = (clientX: number) => {
@@ -30,8 +31,31 @@ export default function BeforeAfterSlider({
     setSliderPosition(percentage);
   };
 
+  const handleContainerMouseMove = (e: React.MouseEvent) => {
+    if (isDragging) {
+       setLensPos(null);
+       return;
+    }
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    // Check if within 'after' area (left of slider)
+    const afterWidth = (sliderPosition / 100) * rect.width;
+    if (x < afterWidth - 20) { // allow some margin near slider handle
+       setLensPos({ x, y });
+    } else {
+       setLensPos(null);
+    }
+  };
+
+  const handleContainerMouseLeave = () => {
+    setLensPos(null);
+  };
+
   const handleMouseDown = () => {
     setIsDragging(true);
+    setLensPos(null);
   };
 
   useEffect(() => {
@@ -66,6 +90,8 @@ export default function BeforeAfterSlider({
       onTouchMove={handleTouchMove}
       onTouchStart={handleMouseDown}
       onMouseDown={handleMouseDown}
+      onMouseMove={handleContainerMouseMove}
+      onMouseLeave={handleContainerMouseLeave}
     >
       {/* Before Image (Background) */}
       <img
@@ -96,6 +122,26 @@ export default function BeforeAfterSlider({
           style={{ width: containerRef.current?.getBoundingClientRect().width || "100%" }}
         />
       </div>
+
+      {/* Magnifier Lens */}
+      {lensPos && containerRef.current && (
+        <div
+          className="absolute rounded-full border-2 border-luxury-gold pointer-events-none shadow-2xl z-30"
+          style={{
+            width: 150,
+            height: 150,
+            left: lensPos.x - 75,
+            top: lensPos.y - 75,
+            backgroundImage: `url(${afterImage})`,
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: `${(lensPos.x / containerRef.current.offsetWidth) * 100}% ${(lensPos.y / containerRef.current.offsetHeight) * 100}%`,
+            backgroundSize: `${containerRef.current.offsetWidth * 2.5}px ${containerRef.current.offsetHeight * 2.5}px`,
+          }}
+        >
+          <div className="absolute inset-0 rounded-full ring-1 ring-black/20" />
+        </div>
+      )}
+
       <div
         className="absolute top-4 right-4 z-10 bg-luxury-cream px-3 py-1 rounded-full border border-luxury-stone shadow-sm"
         style={{ opacity: sliderPosition < 90 ? 1 : 0, transition: "opacity 0.20s" }}

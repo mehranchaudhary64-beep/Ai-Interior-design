@@ -103,8 +103,8 @@ export const RADAR_PROFILES: Record<string, { label: string; scores: RadarData; 
     color: "#8E7C68", // Bronze
     fill: "rgba(142,124,104,0.3)"
   },
-  "Mid-Century Atelier": {
-    label: "Mid-Century Atelier",
+  "Mid-Century Modern": {
+    label: "Mid-Century Modern",
     scores: {
       acousticWarmth: 80,
       lightDiffusion: 70,

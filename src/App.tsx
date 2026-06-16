@@ -26,6 +26,9 @@ import BeforeAfterSlider from "./components/BeforeAfterSlider";
 import DesignSystemSpecs from "./components/DesignSystemSpecs";
 import InteractiveAppDashboard from "./components/InteractiveAppDashboard";
 import InteractiveStylesGallery from "./components/InteractiveStylesGallery";
+import StyleQuiz from "./components/StyleQuiz";
+import VirtualStaging from "./components/VirtualStaging";
+import DesignerCollaboration from "./components/DesignerCollaboration";
 import { PRESET_ROOMS, DESIGN_STYLES } from "./types";
 import { auth, db, googleProvider } from "./lib/firebase";
 import { onAuthStateChanged, signInWithPopup, signOut } from "firebase/auth";
@@ -33,7 +36,7 @@ import { doc, getDoc, setDoc, serverTimestamp } from "firebase/firestore";
 
 export default function App() {
   // Navigation view router: landing, studio, specs
-  const [currentView, setCurrentView] = useState<"landing" | "studio" | "specs">("landing");
+  const [currentView, setCurrentView] = useState<"landing" | "studio" | "specs" | "quiz" | "staging" | "designer">("landing");
   const [userId, setUserId] = useState<string | null>(null);
 
   React.useEffect(() => {
@@ -76,11 +79,11 @@ export default function App() {
     },
     {
       q: "How does the custom corporate consultation service operate?",
-      a: "For Studio Enterprise users, we offer high-throughput API keys, dedicated rendering channels, and customized material matrices. You can seed the model with specific furniture catalogs or acoustic-coefficient materials to enforce rigid commercial corporate guidelines."
+      a: "For Roomora Enterprise users, we offer high-throughput API keys, dedicated rendering channels, and customized material matrices. You can seed the model with specific furniture catalogs or acoustic-coefficient materials to enforce rigid commercial corporate guidelines."
     },
     {
       q: "Is there any persistent export option for CAD, BIM, or vector systems?",
-      a: "Our Atelier Pro and Enterprise plans allow users to export compiled design blueprints, paint swatches, lighting lists, and dimensional spatial estimates directly into high-fidelity PDF spreadsheets suitable for contractors."
+      a: "Our Roomora Pro and Enterprise plans allow users to export compiled design blueprints, paint swatches, lighting lists, and dimensional spatial estimates directly into high-fidelity PDF spreadsheets suitable for contractors."
     }
   ];
 
@@ -107,14 +110,14 @@ export default function App() {
           {/* Logo Brand Title */}
           <div className="flex items-center gap-2.5 cursor-pointer" onClick={() => setCurrentView("landing")}>
             <div className="w-8 h-8 rounded bg-luxury-charcoal flex items-center justify-center text-luxury-gold border border-luxury-accent/30 font-display font-medium text-lg">
-              A
+              R
             </div>
             <div className="flex flex-col">
               <span className="font-display text-base font-semibold tracking-wider text-luxury-charcoal uppercase leading-none">
-                ATELIER AURA
+                ROOMORA AI
               </span>
               <span className="text-[9px] font-mono tracking-widest text-[#8E7C68] uppercase font-bold mt-0.5">
-                Spatial Intelligence • AI
+                Transform Any Room with AI
               </span>
             </div>
           </div>
@@ -130,26 +133,28 @@ export default function App() {
               Exhibition
             </button>
             <button
-              onClick={() => {
-                setCurrentView("landing");
-                setTimeout(() => {
-                  document.getElementById("features-section")?.scrollIntoView({ behavior: "smooth" });
-                }, 100);
-              }}
-              className="text-xs font-mono tracking-wider uppercase text-luxury-slate hover:text-luxury-charcoal transition-all"
+              onClick={() => setCurrentView("quiz")}
+              className={`text-xs font-mono tracking-wider uppercase transition-all ${
+                currentView === "quiz" ? "text-luxury-accent font-semibold" : "text-luxury-slate hover:text-luxury-charcoal"
+              }`}
             >
-              Aesthetic Logic
+              Style Quiz
             </button>
             <button
-              onClick={() => {
-                setCurrentView("landing");
-                setTimeout(() => {
-                  document.getElementById("pricing-section")?.scrollIntoView({ behavior: "smooth" });
-                }, 100);
-              }}
-              className="text-xs font-mono tracking-wider uppercase text-luxury-slate hover:text-luxury-charcoal transition-all"
+              onClick={() => setCurrentView("staging")}
+              className={`text-xs font-mono tracking-wider uppercase transition-all ${
+                currentView === "staging" ? "text-luxury-accent font-semibold" : "text-luxury-slate hover:text-luxury-charcoal"
+              }`}
             >
-              Plans
+              Virtual Staging
+            </button>
+            <button
+              onClick={() => setCurrentView("designer")}
+              className={`text-xs font-mono tracking-wider uppercase transition-all ${
+                currentView === "designer" ? "text-luxury-accent font-semibold" : "text-luxury-slate hover:text-luxury-charcoal"
+              }`}
+            >
+              Consult
             </button>
             <button
               onClick={() => setCurrentView("specs")}
@@ -158,7 +163,7 @@ export default function App() {
               }`}
             >
               <Code className="w-3.5 h-3.5 text-luxury-gold" />
-              Design System System Specs
+              Specs
             </button>
           </nav>
 
@@ -245,10 +250,30 @@ export default function App() {
           </div>
         )}
 
+        {/* VIEW: PERSONALIZED STYLE QUIZ */}
+        {currentView === "quiz" && (
+          <div className="max-w-4xl mx-auto px-6 py-12">
+            <StyleQuiz onComplete={() => setCurrentView("studio")} />
+          </div>
+        )}
+
+        {/* VIEW: VIRTUAL STAGING */}
+        {currentView === "staging" && (
+          <div className="max-w-7xl mx-auto px-6 py-8">
+            <VirtualStaging />
+          </div>
+        )}
+
+        {/* VIEW: DESIGNER COLLABORATION */}
+        {currentView === "designer" && (
+          <div className="max-w-5xl mx-auto px-6 py-8">
+            <DesignerCollaboration />
+          </div>
+        )}
+
         {/* VIEW: MAIN LUXURY LANDING MARKETING HOME */}
         {currentView === "landing" && (
           <div>
-            
             {/* HERO SECTION */}
             <section id="hero-section" className="relative py-20 px-6 md:py-28 overflow-hidden bg-[#FAF9F6] border-b border-luxury-stone">
               <div className="max-w-7xl mx-auto text-center space-y-8 relative z-10">
@@ -298,7 +323,7 @@ export default function App() {
                       beforeImage={PRESET_ROOMS[0].beforeImage}
                       afterImage={PRESET_ROOMS[0].afterImage}
                       beforeLabel="Empty Bare Concrete Environment"
-                      afterLabel="Aura Studio AI • Elegant Oak Lounge"
+                      afterLabel="Roomora AI • Elegant Oak Lounge"
                     />
                   </div>
                 </div>
@@ -330,7 +355,7 @@ export default function App() {
 
                 {/* Prominent Architectural Firms Affiliation Badges */}
                 <div className="mt-12 pt-8 border-t border-luxury-stone flex flex-wrap justify-center items-center gap-8 md:gap-16 text-center opacity-70">
-                  <span className="text-xs font-mono uppercase tracking-widest text-[#8E7C68] font-bold">ATELIER VAN DUYSEN</span>
+                  <span className="text-xs font-mono uppercase tracking-widest text-[#8E7C68] font-bold">ROOMORA PARTNERS & CO.</span>
                   <span className="text-xs font-mono uppercase tracking-widest text-[#8E7C68] font-bold">YOVANOVITCH CO.</span>
                   <span className="text-xs font-mono uppercase tracking-widest text-[#8E7C68] font-bold">KENGO KUMA WORLD</span>
                   <span className="text-xs font-mono uppercase tracking-widest text-[#8E7C68] font-bold">AXEL VERVOORDT SYSTEM</span>
@@ -344,7 +369,7 @@ export default function App() {
                 <div className="text-center max-w-2xl mx-auto space-y-3">
                   <span className="text-[10px] font-mono text-luxury-gold tracking-widest uppercase font-bold">THE CREATIVE PIPELINE</span>
                   <h2 className="font-display text-3xl md:text-4xl text-luxury-charcoal tracking-tight">
-                    How Atelier Aura Models Spaces
+                    How Roomora AI Models Spaces
                   </h2>
                   <p className="text-sm font-sans text-luxury-slate font-light leading-relaxed">
                     A three-step human-centered logical flow that transforms uploaded snapshots into cohesive material specifications and visual clarity.
@@ -481,7 +506,7 @@ export default function App() {
             <section id="pricing-section" className="py-20 px-6 bg-white border-b border-luxury-stone">
               <div className="max-w-7xl mx-auto space-y-12">
                 <div className="text-center max-w-2xl mx-auto space-y-3">
-                  <span className="text-[10px] font-mono text-luxury-gold tracking-widest uppercase font-bold">FLEXIBLE ATELIER ACCORD LIMITS</span>
+                  <span className="text-[10px] font-mono text-luxury-gold tracking-widest uppercase font-bold">FLEXIBLE ROOMORA ACCORD LIMITS</span>
                   <h2 className="font-display text-3xl md:text-4xl text-luxury-charcoal tracking-tight font-medium animate-fade-in">
                     Transparent, Value-Focused Subscriptions
                   </h2>
@@ -541,7 +566,7 @@ export default function App() {
                     </div>
                     
                     <div className="space-y-6">
-                      <span className="text-[10px] font-mono text-luxury-gold tracking-widest uppercase block font-bold">Atelier Pro</span>
+                      <span className="text-[10px] font-mono text-luxury-gold tracking-widest uppercase block font-bold">Roomora Pro</span>
                       <div>
                         <span className="font-display text-5xl font-light text-luxury-charcoal">
                           {billingPeriod === "annual" ? "$39" : "$49"}
@@ -564,14 +589,14 @@ export default function App() {
                       onClick={() => setCurrentView("studio")}
                       className="w-full mt-8 py-3.5 px-4 bg-luxury-charcoal hover:bg-luxury-black text-white text-xs font-mono uppercase tracking-widest rounded shadow hover:border hover:border-luxury-gold transition-all"
                     >
-                      Acquire Atelier Pro
+                      Acquire Roomora Pro
                     </button>
                   </div>
 
                   {/* Card 3 */}
                   <div className="p-8 bg-[#FCFAF7] border border-luxury-stone rounded-xl flex flex-col justify-between min-h-[440px] hover:border-luxury-gold transition-all relative">
                     <div className="space-y-6">
-                      <span className="text-[10px] font-mono text-[#8E7C68] tracking-widest uppercase block font-semibold font-bold">Studio Enterprise</span>
+                      <span className="text-[10px] font-mono text-[#8E7C68] tracking-widest uppercase block font-semibold font-bold">Roomora Enterprise</span>
                       <div>
                         <span className="font-display text-5xl font-light text-luxury-charcoal">
                           {billingPeriod === "annual" ? "$150" : "$190"}
@@ -659,7 +684,7 @@ export default function App() {
             {/* ELEGANT NEWSLETTER STRIP */}
             <section className="py-16 px-6 bg-luxury-charcoal text-luxury-cream text-center relative overflow-hidden">
               <div className="max-w-2xl mx-auto space-y-6 relative z-10">
-                <span className="text-[10px] font-mono text-luxury-gold tracking-widest uppercase block font-bold">THE ATELIER BULLETIN</span>
+                <span className="text-[10px] font-mono text-luxury-gold tracking-widest uppercase block font-bold">THE ROOMORA BULLETIN</span>
                 <h2 className="font-display text-3xl font-light">Join the Circle</h2>
                 <p className="text-xs font-sans text-stone-300 font-light leading-relaxed max-w-md mx-auto">
                   Receive selective architectural portfolios, material releases, and advancements in spatial engineering delivered bi-weekly.
@@ -668,7 +693,7 @@ export default function App() {
                 {newsletterSubscribed ? (
                   <div className="p-4 bg-white/10 border border-luxury-gold/50 rounded-xl max-w-sm mx-auto flex items-center justify-center gap-2 animate-fade-in">
                     <UserCheck className="w-4 h-4 text-luxury-gold animate-bounce" />
-                    <span className="text-xs font-mono text-luxury-cream">Email address verified. Welcome to Atelier.</span>
+                    <span className="text-xs font-mono text-luxury-cream">Email address verified. Welcome to Roomora AI.</span>
                   </div>
                 ) : (
                   <form onSubmit={handleSubNewsletter} className="flex gap-2 max-w-md mx-auto">
@@ -703,10 +728,10 @@ export default function App() {
           <div className="space-y-4">
             <div className="flex items-center gap-2">
               <div className="w-7 h-7 rounded bg-luxury-charcoal flex items-center justify-center text-luxury-gold border border-white/10 font-display font-medium text-base">
-                A
+                R
               </div>
               <span className="font-display text-sm font-semibold tracking-wider text-luxury-charcoal uppercase">
-                ATELIER AURA
+                ROOMORA AI
               </span>
             </div>
             <p className="text-[11px] font-sans text-luxury-slate font-light leading-relaxed">
@@ -719,7 +744,7 @@ export default function App() {
             <ul className="space-y-2 text-xs font-sans text-luxury-slate font-light">
               <li><button onClick={() => setCurrentView("landing")} className="hover:text-luxury-charcoal transition-colors">Digital Portfoliorender</button></li>
               <li><button onClick={() => setCurrentView("landing")} className="hover:text-luxury-charcoal transition-colors">Residential Archives</button></li>
-              <li><button onClick={() => setCurrentView("landing")} className="hover:text-luxury-charcoal transition-colors">Custom Commercial Ateliers</button></li>
+              <li><button onClick={() => setCurrentView("landing")} className="hover:text-luxury-charcoal transition-colors">Custom Commercial Spaces</button></li>
               <li><button onClick={() => setCurrentView("landing")} className="hover:text-luxury-charcoal transition-colors">Lighting Lumens Studies</button></li>
             </ul>
           </div>
@@ -739,14 +764,14 @@ export default function App() {
             <ul className="space-y-2 text-xs font-sans text-[#5E5D57] font-light">
               <li className="flex items-center gap-1.5"><Globe className="w-3 h-3 text-luxury-gold" /> Server Status: Secure 100%</li>
               <li className="flex items-center gap-1.5"><Shield className="w-3 h-3 text-luxury-gold" /> SSL Endpoint Protected</li>
-              <li className="text-[10px] text-luxury-slate font-mono mt-2 uppercase">Atelier client: Active</li>
+              <li className="text-[10px] text-luxury-slate font-mono mt-2 uppercase">Roomora client: Active</li>
             </ul>
           </div>
 
         </div>
 
         <div className="max-w-7xl mx-auto pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-[11px] font-mono text-luxury-slate">
-          <span>© {new Date().getFullYear()} ATELIER AURA CO. ALL REGISTERED RIGHTS SECURED.</span>
+          <span>© {new Date().getFullYear()} ROOMORA AI CO. ALL REGISTERED RIGHTS SECURED.</span>
           <div className="flex items-center gap-4">
             <span className="flex items-center gap-1 text-[10px]">CRAFTED WITH <Heart className="w-3 h-3 text-rose-700 animate-pulse" /> FOR SOULFUL ARCHITECTURES</span>
             <Instagram className="w-4 h-4 cursor-pointer hover:text-luxury-gold transition-colors" />
