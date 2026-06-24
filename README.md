@@ -15,6 +15,16 @@ View your app in AI Studio: https://ai.studio/apps/0479dc92-7103-469b-adfd-f53f6
 
 1. Install dependencies:
    `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
+2. Copy [.env.local.example](.env.local.example) to `.env.local`:
+   `cp .env.local.example .env.local`
+3. Open `.env.local` and set:
+   `GEMINI_API_KEY=your_actual_gemini_api_key`
+4. Run the app:
    `npm run dev`
+
+## GitHub Pages Deployment
+
+This repository deploys the `dist` folder to GitHub Pages from the `main` branch via GitHub Actions.
+
+Enable Pages once in repository settings:
+- **Settings → Pages → Build and deployment → Source: GitHub Actions**
